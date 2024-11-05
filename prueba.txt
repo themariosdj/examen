@@ -1,19 +1,14 @@
 BLOQUE I  (CORREGIDO EMMA)
 1.	Mostrar cuántos usuarios tienen registrados en el sistema.
-> cat /etc/passwd  | wc -l 
-
+cat /etc/passwd  | wc -l 
 2.	Mostrar cuántos usuarios pueden iniciar sesión (utilizan el shell /bin/bash) y cuántos usuarios son servicios (utilizan el shell /sbin/nologin). 
-
-> cat /etc/passwd |cut -d : -f 7 | grep -w “/bin/bash” | wc -l
-
+cat /etc/passwd |cut -d : -f 7 | grep -w “/bin/bash” | wc -l
 3.	Mostrar cuantos usuarios hay conectados en el sistema.
-> who | uniq | wc -l
-	
+who | uniq | wc -l	
 5.	Ordena numéricamente el fichero /etc/passwd según el tercer campo (UID) y crea un fichero llamado uid.ord 
-> sort -t “:” -k3 -n /etc/passwd> /root/Escritorio/uid.ord
+sort -t “:” -k3 -n /etc/passwd> /root/Escritorio/uid.ord
 6.	Haz lo mismo que en el ejercicio anterior, pero utilizando el campo cuarto (GID) y añade la salida ordenada al fichero uid.ord 
-> sort -t “:” -k4 -n /etc/passwd>> /root/Escritorio/uid.ord
-
+sort -t “:” -k4 -n /etc/passwd>> /root/Escritorio/uid.ord
 8. Eliminar dos usuarios de los creados en ejercicio anterior: 
 a.	Uno se eliminará desde el interfaz gráfico. 
 b.	El otro desde la línea de comandos. Observar lo que ocurre en ambos casos 
@@ -51,5 +46,21 @@ Addgroup zapdos informática
 	Sudo usermod -G grupo3 pat
 15.	Borra un usuario de un grupo. 
 Delgroup articuno informática
-Juraría que es con usermod 
 	Sudo usermod -G grupo3 -r pat
+
+-----------Montar un disco------
+sudo fdisk /dev/sd?
+G
+n
+t
+raid
+w
+--------Crear Raid-----------
+mdadm -C /dev/md0 --level=raid? --raid-devices=? rutadisco1 rutadisco2
+mdadm -Es >> /etc/mdadm/mdadm.conf
+mkfs -t ext4 /dev/md0
+mkdir carpeta
+mount /dev/md0 carpeta
+-----acl-------
+setfacl -m u:usuario:rwx carpeta
+setfacl -m g:grupo:rwx carpeta
