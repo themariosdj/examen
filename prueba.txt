@@ -53,3 +53,10 @@ Addgroup zapdos informática
 Delgroup articuno informática
 Juraría que es con usermod 
 	Sudo usermod -G grupo3 -r pat
+----raid----------
+mdadm –C /dev/md0 --level=raid1 --raid-devices=2 /dev/sdb /dev/sdc
+mdadm -Es >> /etc/mdadm/mdadm.conf
+mkfs -t ext4 /dev/md0
+/miraid mount 
+/dev/md0 /miraid
+-----quota---
